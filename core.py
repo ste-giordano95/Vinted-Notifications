@@ -245,8 +245,9 @@ def clear_item_queue(items_queue, new_items_queue):
                     brand=item.brand_title,
                     image=None if item.photo is None else item.photo
                 )
+                buy_url = f"https://www.vinted.it/transaction/buy/new?source_screen=item&transaction%5Bitem_id%5D={item.id}"
                 # add the item to the queue
-                new_items_queue.put((content, item.url, "Open Vinted"))
+                new_items_queue.put((content, item.url, "Open Vinted", buy_url, "Buy Page"))
                 # Add the item to the db
                 db.add_item_to_db(id=item.id, timestamp=item.raw_timestamp, price=item.price, title=item.title,
                                   photo_url=item.photo, query_id=query_id, currency=item.currency)
